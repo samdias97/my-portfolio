@@ -9,11 +9,27 @@ export default createGlobalStyle`
   }
 
   body {
-    background: #312E38;
+    background: linear-gradient(45deg, rgb(38, 38, 38), rgb(102, 0, 153));
+    background-size: 300% 300%;
     color: #FFF;
     font-family: 'Roboto', sans-serif;
     -webkit-font-smooothing: antialiased;
+    animation: 'colors' 15s ease infinite;
   }
+
+  @keyframes colors {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
 
   border-style, input, button {
     font-size: 16px;

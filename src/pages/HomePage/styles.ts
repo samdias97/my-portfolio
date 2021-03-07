@@ -1,8 +1,30 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 interface ITitleProps {
   displayMobile: boolean;
 }
+
+const appearFromRight = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(70px);
+  }
+  to{
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
+
+const appearFromRightSub = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(120px);
+  }
+  to{
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
 
 // eslint-disable-next-line import/prefer-default-export
 export const Container = styled.div`
@@ -19,6 +41,7 @@ export const Title = styled.div<ITitleProps>`
   justify-content: center;
   padding-left: 60px;
   height: 100vh;
+  animation: ${appearFromRight} 1s;
 
   div {
     display: flex;
@@ -33,6 +56,7 @@ export const Title = styled.div<ITitleProps>`
       font-size: 18px;
       letter-spacing: 7px;
       color: #8c8c8c;
+      animation: ${appearFromRightSub} 1s;
     }
   }
 
