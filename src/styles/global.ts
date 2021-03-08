@@ -9,8 +9,8 @@ export default createGlobalStyle`
   }
 
   body {
-    background: linear-gradient(45deg, rgb(38, 38, 38), rgb(102, 0, 153));
-    background-size: 300% 300%;
+    background: linear-gradient(45deg, rgb(29, 29, 29), rgb(102, 0, 153));
+    background-size: 400% 400%;
     color: #FFF;
     font-family: 'Roboto', sans-serif;
     -webkit-font-smooothing: antialiased;
@@ -41,6 +41,7 @@ export default createGlobalStyle`
   }
 
   input, textarea {
+    font-family: 'Roboto', sans-serif;
     color: #000;
   }
 

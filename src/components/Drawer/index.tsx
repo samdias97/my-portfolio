@@ -37,7 +37,7 @@ const Drawer: React.FC = () => {
             <Link to="/">Sobre</Link>
             <Link to="/">Habilidades</Link>
             <Link to="/">Experiências</Link>
-            <Link to="/">Contato</Link>
+            <Link to="/contact">Contato</Link>
           </Menu>
           <Info>
             <a

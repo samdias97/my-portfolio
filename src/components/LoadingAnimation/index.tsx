@@ -8,7 +8,7 @@ const LoadingAnimation: React.FC = () => (
     <Lottie
       options={{
         animationData: animation,
-        loop: false,
+        loop: true,
       }}
       speed={1}
     />
