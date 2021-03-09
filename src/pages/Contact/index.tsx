@@ -14,6 +14,7 @@ import { IState } from '../../store';
 import { IDrawerProps } from '../../store/modules/drawer/types';
 import Token from './env';
 import api from '../../services/api';
+import { useToast } from '../../hooks/toast';
 import {
   Container,
   Content,
@@ -33,16 +34,11 @@ interface IFields {
 const Contact: React.FC = () => {
   const [showLoading, setShowLoading] = useState(true);
   const formRef = useRef<FormHandles>(null);
-  const initialPosition = { lat: -3.7411042, lng: -38.5894979 };
+  const initialPosition = { lat: -3.7401651, lng: -38.6013957 };
   const stateDrawer = useSelector<IState, IDrawerProps>(
     stateTemp => stateTemp.drawer,
   );
-  const [campos, setCampos] = useState({
-    nome: '',
-    email: '',
-    assunto: '',
-    mensagem: '',
-  });
+  const { addToast } = useToast();
 
   const mapPinIcon = Leaflet.icon({
     iconUrl: mapPin,
@@ -57,28 +53,25 @@ const Contact: React.FC = () => {
     }, 2000);
   }, []);
 
-  const handleSubmit = useCallback((data: IFields) => {
-    setCampos({
-      nome: data.nome,
-      email: data.email,
-      assunto: data.assunto,
-      mensagem: data.mensagem,
-    });
-
-    api
-      .post('/send', {
-        nome: data.nome,
-        email: data.email,
-        assunto: data.assunto,
-        mensagem: data.mensagem,
-      })
-      .then(res => {
-        // console.log(res.data);
-      })
-      .catch(err => {
-        // console.log(err);
-      });
-  }, []);
+  const handleSubmit = useCallback(
+    (data: IFields) => {
+      api
+        .post('/send', {
+          nome: data.nome,
+          email: data.email,
+          assunto: data.assunto,
+          mensagem: data.mensagem,
+        })
+        .then(res => {
+          // console.log(res.data);
+        })
+        .catch(err => {
+          addToast();
+          // console.log(err);
+        });
+    },
+    [addToast],
+  );
 
   return (
     <>
@@ -170,7 +163,7 @@ const Contact: React.FC = () => {
                 url={`https://api.mapbox.com/styles/v1/mapbox/dark-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${Token}`}
               />
 
-              <Marker icon={mapPinIcon} position={[-3.7411042, -38.5894979]} />
+              <Marker icon={mapPinIcon} position={[-3.7401651, -38.6013957]} />
             </MapContainer>
           </MapTemp>
         </Container>

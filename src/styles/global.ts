@@ -15,6 +15,7 @@ export default createGlobalStyle`
     font-family: 'Roboto', sans-serif;
     -webkit-font-smooothing: antialiased;
     animation: 'colors' 15s ease infinite;
+    overflow: hidden;
   }
 
   @keyframes colors {
@@ -37,7 +38,7 @@ export default createGlobalStyle`
 
   h1, h2, h3, h4, h5, h6, strong {
     font-weight: 500;
-    color: #ffffff;
+    //color: #ffffff;
   }
 
   input, textarea {
