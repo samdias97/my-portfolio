@@ -16,6 +16,10 @@ export default createGlobalStyle`
     -webkit-font-smooothing: antialiased;
     animation: 'colors' 15s ease infinite;
     overflow: hidden;
+
+    @media screen and (max-width: 1200px) {
+      overflow: auto;
+    }
   }
 
   @keyframes colors {

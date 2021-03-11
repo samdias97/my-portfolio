@@ -62,12 +62,21 @@ const Contact: React.FC = () => {
           assunto: data.assunto,
           mensagem: data.mensagem,
         })
-        .then(res => {
-          // console.log(res.data);
+        .then(() => {
+          addToast({
+            type: 'success',
+            title: 'Mensagem enviada',
+            description:
+              'A sua mensagem foi enviada para a minha caixa de e-mails, irei respondê-la o mais breve possível.',
+          });
         })
-        .catch(err => {
-          addToast();
-          // console.log(err);
+        .catch(() => {
+          addToast({
+            type: 'error',
+            title: 'Erro no envio',
+            description:
+              'Ocorreu um erro ao enviar a mensagem, tente novamente.',
+          });
         });
     },
     [addToast],
@@ -146,7 +155,6 @@ const Contact: React.FC = () => {
           </Content>
           <MapTemp displayMobile={stateDrawer.state}>
             <PanelLocation>
-              <p>Rua Rui Monte, 255</p>
               <p>Antônio Berreza</p>
               <p>Fortaleza, CE</p>
               <p>

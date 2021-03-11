@@ -96,7 +96,8 @@ export const Info = styled.div`
 
 export const ShowDrawer = styled.div`
   display: none;
-  position: absolute;
+  position: absolute !important;
+  z-index: 2;
   top: 20px;
   right: 20px;
 
