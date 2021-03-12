@@ -24,7 +24,9 @@ const Input: React.FC<InputProps> = ({
   ...rest
 }: InputProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const { fieldName, defaultValue, error, registerField } = useField(name);
+  const { fieldName, /* defaultValue, error, */ registerField } = useField(
+    name,
+  );
   const [valueTemp, setValueTemp] = useState('');
 
   const handleInputChange = useCallback(

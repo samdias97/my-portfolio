@@ -21,6 +21,12 @@ const Drawer: React.FC = () => {
     dispatch(changeStateDrawer(show));
   }, [dispatch, show]);
 
+  const mql = window.matchMedia('(max-width: 1200px)');
+
+  mql.addEventListener('change', () => {
+    setShow(true);
+  });
+
   return (
     <>
       {show && (

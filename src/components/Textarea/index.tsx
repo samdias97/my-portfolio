@@ -23,7 +23,9 @@ const Textarea: React.FC<TextareaProps> = ({
   ...rest
 }: TextareaProps) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const { fieldName, defaultValue, error, registerField } = useField(name);
+  const { fieldName, /* defaultValue, error, */ registerField } = useField(
+    name,
+  );
   const [valueTemp, setValueTemp] = useState('');
 
   const handleTextareaChange = useCallback(

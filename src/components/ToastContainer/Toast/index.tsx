@@ -10,6 +10,7 @@ import { Container } from './styles';
 
 interface ToastProps {
   message: ToastMessage;
+  style: Record<string, unknown>;
 }
 
 const icons = {
@@ -18,21 +19,26 @@ const icons = {
   success: <FiCheckCircle size={24} />,
 };
 
-const Toast: React.FC<ToastProps> = ({ message }: ToastProps) => {
+const Toast: React.FC<ToastProps> = ({ message, style }: ToastProps) => {
   const { removeToast } = useToast();
 
   useEffect(() => {
+    const timerMs = message.type === 'success' ? 5000 : 3000;
     const timer = setTimeout(() => {
       removeToast(message.id);
-    }, 5000);
+    }, timerMs);
 
     return () => {
       clearInterval(timer);
     };
-  }, [message.id, removeToast]);
+  }, [message.id, message.type, removeToast]);
 
   return (
-    <Container type={message.type} hasDescription={!!message.description}>
+    <Container
+      type={message.type}
+      hasDescription={!!message.description}
+      style={style}
+    >
       {icons[message.type || 'info']}
 
       <div>

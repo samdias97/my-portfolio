@@ -37,7 +37,6 @@ const appearFromRightBtn = keyframes`
   }
 `;
 
-// eslint-disable-next-line import/prefer-default-export
 export const Container = styled.div`
   display: flex;
 

@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { animated } from 'react-spring';
 
 interface ContainerProps {
   type?: 'success' | 'error' | 'info';
@@ -20,8 +21,7 @@ const toastTypeVariations = {
   `,
 };
 
-// eslint-disable-next-line import/prefer-default-export
-export const Container = styled.div<ContainerProps>`
+export const Container = styled(animated.div)<ContainerProps>`
   width: 360px;
   position: relative;
   padding: 16px 30px 16px 16px;
@@ -69,4 +69,14 @@ export const Container = styled.div<ContainerProps>`
         margin-top: 0;
       }
     `}
+
+  @media screen and (max-width: 1200px) {
+    width: 80%;
+    position: fixed;
+    margin-right: 10%;
+
+    button {
+      display: none;
+    }
+  }
 `;

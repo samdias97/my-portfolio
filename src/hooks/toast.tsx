@@ -1,4 +1,5 @@
 import React, { createContext, useCallback, useContext, useState } from 'react';
+
 import { v4 as uuid } from 'uuid';
 import ToastContainer from '../components/ToastContainer';
 
@@ -16,7 +17,7 @@ export interface ToastMessage {
 
 const ToastContext = createContext<ToastContextData>({} as ToastContextData);
 
-const ToastProvider: React.FC = ({ children }: any) => {
+const ToastProvider: React.FC = ({ children }) => {
   const [messages, setMessages] = useState<ToastMessage[]>([]);
 
   const addToast = useCallback(
