@@ -12,7 +12,6 @@ import Input from '../../components/Input';
 import Textarea from '../../components/Textarea';
 import { IState } from '../../store';
 import { IDrawerProps } from '../../store/modules/drawer/types';
-import Token from './env';
 import api from '../../services/api';
 import { useToast } from '../../hooks/toast';
 import LoadingAnimationMessage from '../../components/LoadingAnimationMessage';
@@ -179,7 +178,7 @@ const Contact: React.FC = () => {
               >
                 {/* <TileLayer url="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png" /> */}
                 <TileLayer
-                  url={`https://api.mapbox.com/styles/v1/mapbox/dark-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${Token}`}
+                  url={`https://api.mapbox.com/styles/v1/mapbox/dark-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_ACCESS_TOKEN_MAP_BOX}`}
                 />
 
                 <Marker
