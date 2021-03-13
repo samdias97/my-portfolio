@@ -7,18 +7,29 @@ import {
   AiOutlineClose,
 } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { IState } from '../../store';
+import { IDrawerProps } from '../../store/modules/drawer/types';
 import { changeStateDrawer } from '../../store/modules/drawer/actions';
 import Logo from '../../assets/sam2.jpg';
 import { Container, Header, Menu, Info, ShowDrawer } from './styles';
 
 const Drawer: React.FC = () => {
   const dispatch = useDispatch();
-  const [show, setShow] = useState(true);
+  const stateDrawer = useSelector<IState, IDrawerProps>(
+    stateTemp => stateTemp.drawer,
+  );
+
+  const [show, setShow] = useState(!stateDrawer.state);
 
   const handleChangeStateDrawer = useCallback(() => {
-    setShow(!show);
-    dispatch(changeStateDrawer(show));
+    if (window.innerWidth <= 1200) {
+      setShow(!show);
+      dispatch(changeStateDrawer(show));
+    } else {
+      setShow(true);
+      dispatch(changeStateDrawer(false));
+    }
   }, [dispatch, show]);
 
   const mql = window.matchMedia('(max-width: 1200px)');
@@ -40,10 +51,18 @@ const Drawer: React.FC = () => {
             </header>
           </Header>
           <Menu>
-            <Link to="/">Sobre</Link>
-            <Link to="/">Habilidades</Link>
-            <Link to="/">Experiências</Link>
-            <Link to="/contact">Contato</Link>
+            <Link to="/" onClick={handleChangeStateDrawer}>
+              Sobre
+            </Link>
+            <Link to="/" onClick={handleChangeStateDrawer}>
+              Habilidades
+            </Link>
+            <Link to="/" onClick={handleChangeStateDrawer}>
+              Experiências
+            </Link>
+            <Link to="/contact" onClick={handleChangeStateDrawer}>
+              Contato
+            </Link>
           </Menu>
           <Info>
             <a

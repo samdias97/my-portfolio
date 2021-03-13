@@ -95,6 +95,7 @@ export const Title = styled.div`
   }
 
   @media screen and (max-width: 1200px) {
+    padding-top: 10px;
     padding-right: 20px;
     padding-left: 15px;
   }

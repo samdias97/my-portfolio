@@ -27,6 +27,7 @@ const HomePage: React.FC = () => {
       ) : (
         <Container>
           <Drawer />
+
           <Title displayMobile={stateDrawer.state}>
             <div>
               <h1>Oi, </h1>

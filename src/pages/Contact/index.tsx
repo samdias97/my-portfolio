@@ -37,11 +37,11 @@ const Contact: React.FC = () => {
   const [showLoading, setShowLoading] = useState(true);
   const [showLoadingMessage, setShowLoadingMessage] = useState(false);
   const formRef = useRef<FormHandles>(null);
+  const { addToast } = useToast();
   const initialPosition = { lat: -3.7401651, lng: -38.6013957 };
   const stateDrawer = useSelector<IState, IDrawerProps>(
     stateTemp => stateTemp.drawer,
   );
-  const { addToast } = useToast();
 
   const mapPinIcon = Leaflet.icon({
     iconUrl: mapPin,
@@ -96,6 +96,7 @@ const Contact: React.FC = () => {
       ) : (
         <Container>
           <Drawer />
+
           <ContentAll>
             {showLoadingMessage && <LoadingAnimationMessage />}
             <Content displayMobile={stateDrawer.state}>
