@@ -168,7 +168,7 @@ const Contact: React.FC = () => {
                 <p>Antônio Berreza</p>
                 <p>Fortaleza, CE</p>
                 <p>
-                  <strong>@</strong>: samuel.sdias@hotmail.com
+                  <strong>@</strong>: samuel.myportfolio@gmail.com
                 </p>
               </PanelLocation>
               <MapContainer
