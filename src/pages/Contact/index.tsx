@@ -102,10 +102,10 @@ const Contact: React.FC = () => {
               <Title>
                 <h1>Contato</h1>
                 <p>
-                  Estou interessado em oportunidades de freelance -
-                  especialmente projetos ambiciosos ou grandes. No entanto, se
-                  você tiver outro pedido ou dúvida, não hesite em usar o
-                  formulário.
+                  Estou interessado em oportunidades de crescimento na área de
+                  desenvolvimento web, especialmente contribuindo em projetos
+                  ambiciosos e criativos. Caso tenha algum interesse ou dúvida,
+                  não hesite me enviar uma mensagem pelo formulário abaixo.
                 </p>
               </Title>
               <FormContainer>
