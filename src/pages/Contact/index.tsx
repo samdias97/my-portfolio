@@ -15,6 +15,8 @@ import { IDrawerProps } from '../../store/modules/drawer/types';
 import Token from './env';
 import api from '../../services/api';
 import { useToast } from '../../hooks/toast';
+import LoadingAnimationMessage from '../../components/LoadingAnimationMessage';
+
 import {
   Container,
   Content,
@@ -22,6 +24,7 @@ import {
   FormContainer,
   MapTemp,
   PanelLocation,
+  ContentAll,
 } from './styles';
 
 interface IFields {
@@ -33,6 +36,7 @@ interface IFields {
 
 const Contact: React.FC = () => {
   const [showLoading, setShowLoading] = useState(true);
+  const [showLoadingMessage, setShowLoadingMessage] = useState(false);
   const formRef = useRef<FormHandles>(null);
   const initialPosition = { lat: -3.7401651, lng: -38.6013957 };
   const stateDrawer = useSelector<IState, IDrawerProps>(
@@ -55,6 +59,8 @@ const Contact: React.FC = () => {
 
   const handleSubmit = useCallback(
     (data: IFields) => {
+      setShowLoadingMessage(true);
+
       api
         .post('/send', {
           nome: data.nome,
@@ -63,6 +69,7 @@ const Contact: React.FC = () => {
           mensagem: data.mensagem,
         })
         .then(() => {
+          setShowLoadingMessage(false);
           addToast({
             type: 'success',
             title: 'Mensagem enviada',
@@ -71,6 +78,7 @@ const Contact: React.FC = () => {
           });
         })
         .catch(() => {
+          setShowLoadingMessage(false);
           addToast({
             type: 'error',
             title: 'Erro no envio',
@@ -89,91 +97,98 @@ const Contact: React.FC = () => {
       ) : (
         <Container>
           <Drawer />
-          <Content displayMobile={stateDrawer.state}>
-            <Title>
-              <h1>Contato</h1>
-              <p>
-                Estou interessado em oportunidades de freelance - especialmente
-                projetos ambiciosos ou grandes. No entanto, se você tiver outro
-                pedido ou dúvida, não hesite em usar o formulário.
-              </p>
-            </Title>
-            <FormContainer>
-              <Form ref={formRef} onSubmit={handleSubmit}>
-                <ul>
-                  <li>
-                    <Input
-                      name="nome"
-                      typeProps="text"
-                      placeholderProps="Nome"
-                    />
-                  </li>
-                  <li>
-                    <Input
-                      name="email"
-                      typeProps="text"
-                      placeholderProps="Email"
-                    />
-                  </li>
-                </ul>
-                <ul>
-                  <li>
-                    <Input
-                      name="assunto"
-                      typeProps="text"
-                      placeholderProps="Assunto"
-                    />
-                  </li>
-                </ul>
-                <ul>
-                  <li>
-                    <Textarea name="mensagem" placeholderProps="Mensagem" />
-                  </li>
-                </ul>
-                <div className="center">
-                  <button type="submit" className="btn">
-                    <svg
-                      width="180px"
-                      height="60px"
-                      viewBox="0 0 180 60"
-                      className="border"
-                    >
-                      <polyline
-                        points="179,1 179,59 1,59 1,1 179,1"
-                        className="bg-line"
+          <ContentAll>
+            {showLoadingMessage && <LoadingAnimationMessage />}
+            <Content displayMobile={stateDrawer.state}>
+              <Title>
+                <h1>Contato</h1>
+                <p>
+                  Estou interessado em oportunidades de freelance -
+                  especialmente projetos ambiciosos ou grandes. No entanto, se
+                  você tiver outro pedido ou dúvida, não hesite em usar o
+                  formulário.
+                </p>
+              </Title>
+              <FormContainer>
+                <Form ref={formRef} onSubmit={handleSubmit}>
+                  <ul>
+                    <li>
+                      <Input
+                        name="nome"
+                        typeProps="text"
+                        placeholderProps="Nome"
                       />
-                      <polyline
-                        points="179,1 179,59 1,59 1,1 179,1"
-                        className="hl-line"
+                    </li>
+                    <li>
+                      <Input
+                        name="email"
+                        typeProps="text"
+                        placeholderProps="Email"
                       />
-                    </svg>
-                    <span>Enviar</span>
-                  </button>
-                </div>
-              </Form>
-            </FormContainer>
-          </Content>
-          <MapTemp displayMobile={stateDrawer.state}>
-            <PanelLocation>
-              <p>Antônio Berreza</p>
-              <p>Fortaleza, CE</p>
-              <p>
-                <strong>@</strong>: samuel.sdias@hotmail.com
-              </p>
-            </PanelLocation>
-            <MapContainer
-              center={initialPosition}
-              zoom={15}
-              style={{ width: '100%', height: '100%' }}
-            >
-              {/* <TileLayer url="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png" /> */}
-              <TileLayer
-                url={`https://api.mapbox.com/styles/v1/mapbox/dark-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${Token}`}
-              />
+                    </li>
+                  </ul>
+                  <ul>
+                    <li>
+                      <Input
+                        name="assunto"
+                        typeProps="text"
+                        placeholderProps="Assunto"
+                      />
+                    </li>
+                  </ul>
+                  <ul>
+                    <li>
+                      <Textarea name="mensagem" placeholderProps="Mensagem" />
+                    </li>
+                  </ul>
+                  <div className="center">
+                    <button type="submit" className="btn">
+                      <svg
+                        width="180px"
+                        height="60px"
+                        viewBox="0 0 180 60"
+                        className="border"
+                      >
+                        <polyline
+                          points="179,1 179,59 1,59 1,1 179,1"
+                          className="bg-line"
+                        />
+                        <polyline
+                          points="179,1 179,59 1,59 1,1 179,1"
+                          className="hl-line"
+                        />
+                      </svg>
+                      <span>Enviar</span>
+                    </button>
+                  </div>
+                </Form>
+              </FormContainer>
+            </Content>
+            <MapTemp displayMobile={stateDrawer.state}>
+              <PanelLocation>
+                <p>Antônio Berreza</p>
+                <p>Fortaleza, CE</p>
+                <p>
+                  <strong>@</strong>: samuel.sdias@hotmail.com
+                </p>
+              </PanelLocation>
+              <MapContainer
+                center={initialPosition}
+                zoom={15}
+                style={{ width: '100%', height: '100%' }}
+              >
+                {/* <TileLayer url="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png" /> */}
+                <TileLayer
+                  url={`https://api.mapbox.com/styles/v1/mapbox/dark-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${Token}`}
+                />
 
-              <Marker icon={mapPinIcon} position={[-3.7401651, -38.6013957]} />
-            </MapContainer>
-          </MapTemp>
+                <Marker
+                  icon={mapPinIcon}
+                  position={[-3.7401651, -38.6013957]}
+                />
+              </MapContainer>
+            </MapTemp>
+          </ContentAll>
         </Container>
       )}
     </>

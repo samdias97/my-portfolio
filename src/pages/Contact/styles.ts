@@ -57,6 +57,16 @@ export const Container = styled.div`
   }
 `;
 
+export const ContentAll = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  @media screen and (max-width: 1200px) {
+    flex-direction: column;
+  }
+`;
+
 export const Content = styled.div<IContainerProps>`
   width: 100%;
   display: flex;
