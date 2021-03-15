@@ -54,7 +54,7 @@ const Drawer: React.FC = () => {
             <Link to="/" onClick={handleChangeStateDrawer}>
               Sobre
             </Link>
-            <Link to="/" onClick={handleChangeStateDrawer}>
+            <Link to="/skills" onClick={handleChangeStateDrawer}>
               Habilidades
             </Link>
             <Link to="/" onClick={handleChangeStateDrawer}>
