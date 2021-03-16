@@ -39,15 +39,15 @@ This project was developed with the following technologies:
 
 1º - Para instalar as dependências:
 
-<div style="background:#404040">
-  <p style="padding:5px">yarn</p>
-</div>
+<code>
+  <p>yarn</p>
+</code>
 
 2º - Para iniciar a aplicação:
 
-<div style="background:#404040">
-  <p style="padding:5px">yarn start</p>
-</div>
+<code>
+  <p>yarn start</p>
+</code>
 
 <br />
 
