@@ -7,7 +7,7 @@
 </h1>
 
 <p align="center">
-  Site portfólio, criado com o intuito de apresentar de forma completa e exemplificada toda a minha trajetória e conhecimentos adquiridos como web developer. (Front end)
+  Portfolio site, created in order to present in a complete and exemplified way all my trajectory and knowledge acquired as a web developer. (Front end)
 </p>
 
 <div align="center">
@@ -37,11 +37,11 @@ This project was developed with the following technologies:
 
 ## ⚙ Configuração
 
-1º - Para instalar as dependências:
+1º - To install the dependencies:
 
 <code>yarn</code>
 
-2º - Para iniciar a aplicação:
+2º - To start the application:
 
 <code>yarn start</code>
 
