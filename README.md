@@ -39,15 +39,11 @@ This project was developed with the following technologies:
 
 1º - Para instalar as dependências:
 
-<code>
-  <p>yarn</p>
-</code>
+<code>yarn</code>
 
 2º - Para iniciar a aplicação:
 
-<code>
-  <p>yarn start</p>
-</code>
+<code>yarn start</code>
 
 <br />
 
