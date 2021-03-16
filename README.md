@@ -11,10 +11,8 @@
 </p>
 
 <div align="center">
-  <img src="" alt="demo" heigth="425">
+  <img src="./assetsGithub/my-portfolio.gif" alt="demo" heigth="425">
 </div>
-
-/* Gif aqui com 'screen to gif' */
 
 <hr />
 
@@ -35,7 +33,7 @@ This project was developed with the following technologies:
 
 <br />
 
-## ⚙ Configuração
+## ⚙ Settings
 
 1º - To install the dependencies:
 
