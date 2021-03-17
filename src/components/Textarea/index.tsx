@@ -1,5 +1,3 @@
-/* eslint-disable react/require-default-props */
-/* eslint-disable react/no-unused-prop-types */
 import React, {
   useCallback,
   useEffect,
@@ -13,30 +11,27 @@ import { Container } from './styles';
 interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   name: string;
   placeholderProps: string;
-  onValue?: (arg: string) => void;
 }
 
 const Textarea: React.FC<TextareaProps> = ({
   name,
   placeholderProps,
-  onValue,
   ...rest
 }: TextareaProps) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const { fieldName, /* defaultValue, error, */ registerField } = useField(
-    name,
-  );
-  const [valueTemp, setValueTemp] = useState('');
+  const { fieldName, defaultValue, error, registerField } = useField(name);
+  const [isFocused, setIsFocused] = useState(false);
+  const [isFilled, setIsFilled] = useState(false);
 
-  const handleTextareaChange = useCallback(
-    e => {
-      if (onValue) {
-        onValue(e.target.value);
-      }
-      setValueTemp(e.target.value);
-    },
-    [onValue],
-  );
+  const handleInputFocus = useCallback(() => {
+    setIsFocused(true);
+  }, []);
+
+  const handleInputBlur = useCallback(() => {
+    setIsFocused(false);
+
+    setIsFilled(!!textareaRef.current?.value);
+  }, []);
 
   useEffect(() => {
     registerField({
@@ -47,18 +42,16 @@ const Textarea: React.FC<TextareaProps> = ({
   }, [fieldName, registerField]);
 
   return (
-    <Container>
+    <Container focus={isFocused} blur={isFilled} error={!!error}>
       <textarea
         id={placeholderProps}
+        onFocus={handleInputFocus}
+        onBlur={handleInputBlur}
+        defaultValue={defaultValue}
         ref={textareaRef}
-        value={valueTemp}
-        onChange={eForChange => {
-          handleTextareaChange(eForChange);
-        }}
-        required
-        // eslint-disable-next-line react/jsx-props-no-spreading
         {...rest}
       />
+
       <label className="label" htmlFor={placeholderProps}>
         {placeholderProps}
       </label>

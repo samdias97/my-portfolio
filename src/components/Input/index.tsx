@@ -12,32 +12,28 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   typeProps: string;
   placeholderProps: string;
-  // eslint-disable-next-line react/require-default-props
-  onValue?: (arg: string) => void;
 }
 
 const Input: React.FC<InputProps> = ({
   name,
   placeholderProps,
   typeProps,
-  onValue,
   ...rest
 }: InputProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const { fieldName, /* defaultValue, error, */ registerField } = useField(
-    name,
-  );
-  const [valueTemp, setValueTemp] = useState('');
+  const { fieldName, defaultValue, error, registerField } = useField(name);
+  const [isFocused, setIsFocused] = useState(false);
+  const [isFilled, setIsFilled] = useState(false);
 
-  const handleInputChange = useCallback(
-    e => {
-      if (onValue) {
-        onValue(e.target.value);
-      }
-      setValueTemp(e.target.value);
-    },
-    [onValue],
-  );
+  const handleInputFocus = useCallback(() => {
+    setIsFocused(true);
+  }, []);
+
+  const handleInputBlur = useCallback(() => {
+    setIsFocused(false);
+
+    setIsFilled(!!inputRef.current?.value);
+  }, []);
 
   useEffect(() => {
     registerField({
@@ -48,19 +44,17 @@ const Input: React.FC<InputProps> = ({
   }, [fieldName, registerField]);
 
   return (
-    <Container>
+    <Container focus={isFocused} blur={isFilled} error={!!error}>
       <input
         id={placeholderProps}
         type={typeProps}
+        onFocus={handleInputFocus}
+        onBlur={handleInputBlur}
+        defaultValue={defaultValue}
         ref={inputRef}
-        value={valueTemp}
-        onChange={eForChange => {
-          handleInputChange(eForChange);
-        }}
-        required
-        // eslint-disable-next-line react/jsx-props-no-spreading
         {...rest}
       />
+
       <label className="label" htmlFor={placeholderProps}>
         {placeholderProps}
       </label>

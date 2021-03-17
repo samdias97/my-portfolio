@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+interface IProps {
+  focus: boolean;
+  blur: boolean;
+  error: boolean;
+}
+
+export const Container = styled.div<IProps>`
   position: relative;
   input {
     width: 100%;
@@ -40,15 +46,25 @@ export const Container = styled.div`
   /* Interation */
   input:valid,
   input:focus {
-    border-bottom: 2px solid #00e6b8;
+    border-bottom: ${props =>
+      (props.focus || props.blur) && !props.error
+        ? '2px solid #00e6b8'
+        : props.error
+        ? '2px solid #ff0000'
+        : '2px solid #2b2b2b'};
   }
 
   input:valid + label,
   input:focus + label {
-    color: #00e6b8;
-    font-size: 0.8rem;
-    margin-left: 0;
-    top: -33px;
-    pointer-events: none;
+    color: ${props =>
+      (props.focus || props.blur) && !props.error
+        ? '#00e6b8'
+        : props.error
+        ? '#ff0000'
+        : ''};
+    font-size: ${props => (props.focus || props.blur ? '0.8rem' : '')};
+    margin-left: ${props => (props.focus || props.blur ? 0 : '')};
+    top: ${props => (props.focus || props.blur ? '-33px' : '')};
+    pointer-events: ${props => (props.focus || props.blur ? 'none' : '')};
   }
 `;

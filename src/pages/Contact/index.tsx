@@ -4,7 +4,9 @@ import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 import Leaflet from 'leaflet';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
+import * as Yup from 'yup';
 import { useSelector } from 'react-redux';
+import getValidationErrors from '../../utils/getValidationErrors';
 import mapPin from '../../assets/pin.svg';
 import Drawer from '../../components/Drawer';
 import LoadingAnimation from '../../components/LoadingAnimation';
@@ -57,34 +59,72 @@ const Contact: React.FC = () => {
   }, []);
 
   const handleSubmit = useCallback(
-    (data: IFields) => {
+    async (data: IFields) => {
       setShowLoadingMessage(true);
 
-      api
-        .post('/send', {
-          nome: data.nome,
-          email: data.email,
-          assunto: data.assunto,
-          mensagem: data.mensagem,
-        })
-        .then(() => {
-          setShowLoadingMessage(false);
-          addToast({
-            type: 'success',
-            title: 'Mensagem enviada',
-            description:
-              'A sua mensagem foi enviada para a minha caixa de e-mails, irei respondê-la o mais breve possível.',
+      try {
+        formRef.current?.setErrors({});
+
+        const schema = Yup.object().shape({
+          nome: Yup.string().required('Nome é obrigatório!'),
+          email: Yup.string()
+            .required('E-mail é obrigatório!')
+            .email('Digite um email válido!'),
+          assunto: Yup.string().required('Assunto é obrigatório!'),
+          mensagem: Yup.string().required('Mensagem é obrigatória!'),
+        });
+
+        await schema.validate(data, {
+          abortEarly: false,
+        });
+
+        api
+          .post('/send1', {
+            nome: data.nome,
+            email: data.email,
+            assunto: data.assunto,
+            mensagem: data.mensagem,
+          })
+          .then(() => {
+            setShowLoadingMessage(false);
+            addToast({
+              type: 'success',
+              title: 'Mensagem enviada',
+              description:
+                'A sua mensagem foi enviada para a minha caixa de e-mails, irei respondê-la o mais breve possível.',
+            });
+          })
+          .catch(() => {
+            setShowLoadingMessage(false);
+            addToast({
+              type: 'error',
+              title: 'Erro no envio',
+              description:
+                'Ocorreu um erro ao enviar a mensagem, tente novamente.',
+            });
           });
-        })
-        .catch(() => {
-          setShowLoadingMessage(false);
+      } catch (err) {
+        setShowLoadingMessage(false);
+        if (err instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(err);
+
+          formRef.current?.setErrors(errors);
+
+          addToast({
+            type: 'error',
+            title: 'Erro no envio',
+            description:
+              'Existem campos obrigatórios não preenchidos, favor verificar.',
+          });
+        } else {
           addToast({
             type: 'error',
             title: 'Erro no envio',
             description:
               'Ocorreu um erro ao enviar a mensagem, tente novamente.',
           });
-        });
+        }
+      }
     },
     [addToast],
   );
