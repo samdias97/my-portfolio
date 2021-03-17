@@ -79,7 +79,7 @@ const Contact: React.FC = () => {
         });
 
         api
-          .post('/send1', {
+          .post('/send', {
             nome: data.nome,
             email: data.email,
             assunto: data.assunto,
