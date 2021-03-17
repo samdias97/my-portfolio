@@ -9,6 +9,7 @@ import StyledComponentsLogo from '../../assets/styled-components-logo.png';
 import TypescriptLogo from '../../assets/typescript-logo.svg';
 import Git from '../../assets/git-logo.png';
 import GitHub from '../../assets/github-logo.svg';
+import NodeLogo from '../../assets/nodejs-logo.svg';
 
 export default [
   {
@@ -25,6 +26,11 @@ export default [
     id: uuidv4(),
     image: JavascriptLogo,
     title: 'JavaScript',
+  },
+  {
+    id: uuidv4(),
+    image: TypescriptLogo,
+    title: 'TypeScript',
   },
   {
     id: uuidv4(),
@@ -48,8 +54,8 @@ export default [
   },
   {
     id: uuidv4(),
-    image: TypescriptLogo,
-    title: 'TypeScript',
+    image: NodeLogo,
+    title: 'Node.js',
   },
   {
     id: uuidv4(),

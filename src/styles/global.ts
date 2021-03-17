@@ -10,7 +10,7 @@ export default createGlobalStyle`
 
   body {
     background: linear-gradient(45deg, rgb(29, 29, 29), rgb(102, 0, 153));
-    background-size: 400% 400%;
+    background-size: 500% 500%;
     color: #FFF;
     font-family: 'Roboto', sans-serif;
     -webkit-font-smooothing: antialiased;

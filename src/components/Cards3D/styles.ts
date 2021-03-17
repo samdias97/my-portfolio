@@ -13,7 +13,7 @@ export const Container = styled.div`
   ._wcf8- {
     top: 0 !important;
     left: 0 !important;
-    background-size: 140px !important;
+    background-size: 120px !important;
   }
 
   ._jk5LF {
@@ -21,14 +21,14 @@ export const Container = styled.div`
   }
 
   ._xsi02 {
-    width: 170px;
-    height: 230px;
+    width: 150px;
+    height: 210px;
   }
 
   h1 {
     font-family: 'Roboto', sans-serif !important;
     -webkit-font-smooothing: antialiased;
-    font-size: 24px !important;
+    font-size: 20px !important;
   }
 
   @media screen and (max-width: 1200px) {
