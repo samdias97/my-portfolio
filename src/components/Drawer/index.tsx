@@ -36,6 +36,8 @@ const Drawer: React.FC = () => {
 
   mql.addEventListener('change', () => {
     setShow(true);
+    console.log('Entrou');
+    console.log('show: true');
   });
 
   return (
