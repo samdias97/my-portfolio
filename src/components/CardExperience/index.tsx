@@ -16,7 +16,7 @@ const CardExperience: React.FC<IProps> = ({
   date,
   description,
 }) => {
-  const [showModal, setShowModal] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
 
   return (
     <Container directionProps={direction}>
@@ -25,7 +25,7 @@ const CardExperience: React.FC<IProps> = ({
       <h3>{date}</h3>
       <footer>
         <h4>{description}</h4>
-        <FiMoreHorizontal size={24} onClick={() => setShowModal(true)} />
+        <FiMoreHorizontal size={24} />
       </footer>
     </Container>
   );
