@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import LoadingAnimation from '../../components/LoadingAnimation';
 import Drawer from '../../components/Drawer';
@@ -22,12 +22,19 @@ const Experiences: React.FC = () => {
     stateTemp => stateTemp.drawer,
   );
 
-  console.log('stateDrawer.state: ', stateDrawer.state);
-
   useEffect(() => {
     setTimeout(() => {
       setShowLoading(false);
     }, 2000);
+  }, []);
+
+  const monthsCounter = useCallback((): number => {
+    const dateTimeInit = new Date('2020-10-01 00:00:00').getTime();
+    const dateTimeNow = new Date().getTime();
+
+    const dateTime = dateTimeNow - dateTimeInit;
+
+    return new Date(dateTime).getMonth();
   }, []);
 
   return (
@@ -44,12 +51,12 @@ const Experiences: React.FC = () => {
               <ContainerCircle line="bottom">
                 <ContainerLineVertical lineCard />
               </ContainerCircle>
-              <ContainerLineHorizontal />
+              <ContainerLineHorizontal animationDirection="left" />
               <CardExperience
                 direction="right"
                 title="Desenvolvedor FrontEnd ReactJS com TypeScript"
-                date="out de 2020 - Present • 6 meses"
-                description="Grupo Servnac • 6 meses"
+                date={`out de 2020 - Presente • ${monthsCounter()} meses`}
+                description="Grupo Servnac • Tempo integral"
               />
             </ContainerCard>
             <ContainerLineVertical />
@@ -61,7 +68,7 @@ const Experiences: React.FC = () => {
                 date="dez de 2019 - out de 2020 • 11 meses"
                 description="Grupo Servnac • Tempo integral"
               />
-              <ContainerLineHorizontal />
+              <ContainerLineHorizontal animationDirection="right" />
               <ContainerCircle line="center">
                 <ContainerLineVertical lineCard />
               </ContainerCircle>
@@ -72,11 +79,11 @@ const Experiences: React.FC = () => {
               <ContainerCircle line="center">
                 <ContainerLineVertical lineCard />
               </ContainerCircle>
-              <ContainerLineHorizontal />
+              <ContainerLineHorizontal animationDirection="left" />
               <CardExperience
                 direction="right"
                 title="Estágio de Implantação e Manutenção Protheus | TOTVS"
-                date="ago de 2019 - dez de 2019 • 5 meses"
+                date="ago de 2019 - nov de 2019 • 4 meses"
                 description="Grupo Servnac • Estágio"
               />
             </ContainerCard>
@@ -89,7 +96,7 @@ const Experiences: React.FC = () => {
                 date="2018 - jul de 2019 • 1 ano"
                 description="OAB - Ordem dos Advogados do Brasil • Estágio"
               />
-              <ContainerLineHorizontal />
+              <ContainerLineHorizontal animationDirection="right" />
               <ContainerCircle line="top">
                 <ContainerLineVertical lineCard />
               </ContainerCircle>

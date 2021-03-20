@@ -41,25 +41,27 @@ export const ContainerCards = styled.div<ICardsProps>`
   flex-direction: column;
   justify-content: center;
 
-  h1#contactTitle {
-    margin-left: 2%;
-    font-size: 68px;
-    color: #00ffcc;
-    font-weight: bold;
-    animation: ${appearFromRight} 1s;
-  }
-
-  div#containerCards {
-    animation: ${appearFromRightCards} 1s;
-  }
-
   @media screen and (max-width: 1200px) {
     display: ${props => (props.displayMobile ? 'flex' : 'none')};
-    h1#contactTitle {
-      font-size: 50px;
-    }
     padding-top: 10px;
     padding-right: 15px;
     padding-left: 15px;
   }
+`;
+
+export const Title = styled.h1`
+  margin-left: 2%;
+  font-size: 68px;
+  color: #00ffcc;
+  font-weight: bold;
+  margin-bottom: 8px;
+  animation: ${appearFromRight} 1s;
+
+  @media screen and (max-width: 1200px) {
+    font-size: 50px;
+  }
+`;
+
+export const ContainerCards3D = styled.div`
+  animation: ${appearFromRightCards} 1s;
 `;

@@ -51,6 +51,7 @@ const appearFromBottom = keyframes`
 export const Container = styled.div`
   display: flex;
   align-items: center;
+  height: 100vh;
 
   @media screen and (max-width: 1200px) {
     flex-direction: column;
@@ -79,7 +80,7 @@ export const Content = styled.div<IContainerProps>`
 `;
 
 export const Title = styled.div`
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   margin-left: 4%;
   animation: ${appearFromRight} 1s;
 
@@ -91,7 +92,7 @@ export const Title = styled.div`
   }
   p {
     font-size: 16px;
-    margin-top: 25px;
+    margin-top: 15px;
   }
 
   @media screen and (max-width: 1200px) {

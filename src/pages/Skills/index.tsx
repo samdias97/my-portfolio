@@ -6,7 +6,7 @@ import Cards3D from '../../components/Cards3D';
 import { IState } from '../../store';
 import { IDrawerProps } from '../../store/modules/drawer/types';
 
-import { Container, ContainerCards } from './styles';
+import { Container, ContainerCards, Title, ContainerCards3D } from './styles';
 
 const Skills: React.FC = () => {
   const [showLoading, setShowLoading] = useState(true);
@@ -28,10 +28,10 @@ const Skills: React.FC = () => {
         <Container>
           <Drawer />
           <ContainerCards displayMobile={stateDrawer.state}>
-            <h1 id="contactTitle">Habilidades</h1>
-            <div id="containerCards">
+            <Title>Habilidades</Title>
+            <ContainerCards3D>
               <Cards3D />
-            </div>
+            </ContainerCards3D>
           </ContainerCards>
         </Container>
       )}

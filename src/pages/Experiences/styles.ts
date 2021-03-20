@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 interface IContentProps {
   displayMobile: boolean;
@@ -12,14 +12,46 @@ interface IContainerCircle {
   line: 'top' | 'bottom' | 'center';
 }
 
+interface IContainerLineHorizontal {
+  animationDirection: 'left' | 'right';
+}
+
 interface IContainerLineVertical {
   lineCard?: boolean;
 }
 
+const appearFromRight = keyframes`
+  from {
+    transform: translateX(30px);
+  }
+  to{
+    transform: translateX(0);
+  }
+`;
+
+const appearFromRightTitle = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(70px);
+  }
+  to{
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
+
+const appearFromLeft = keyframes`
+  from {
+    transform: translateX(-30px);
+  }
+  to{
+    transform: translateX(0);
+  }
+`;
+
 export const Container = styled.div`
   display: flex;
   width: 100%;
-  height: 100vh;
   align-items: center;
 `;
 
@@ -32,15 +64,26 @@ export const Content = styled.div<IContentProps>`
 
   @media screen and (max-width: 1200px) {
     display: ${props => (props.displayMobile ? 'flex' : 'none')};
-    //padding-top: 0px;
+    padding: 20px;
   }
 `;
 
 export const Title = styled.h1`
-  margin-left: 2%;
+  position: relative;
+  top: -4px;
   font-size: 68px;
   color: #00ffcc;
   font-weight: bold;
+  animation: ${appearFromRightTitle} 1s;
+
+  @media screen and (min-width: 1300px) {
+    top: -16px;
+  }
+
+  @media screen and (max-width: 1200px) {
+    font-size: 50px;
+    margin-bottom: 15px;
+  }
 `;
 
 export const ContainerCard = styled.div<IContainerCard>`
@@ -48,6 +91,8 @@ export const ContainerCard = styled.div<IContainerCard>`
   align-items: center;
   margin-left: ${props => (props.classCard === 'right' ? '500px' : '')};
   margin-right: ${props => (props.classCard === 'left' ? '500px' : '')};
+
+  //animation: ${appearFromRight} 1s;
 
   @media screen and (max-width: 1200px) {
     margin-left: 0;
@@ -77,10 +122,14 @@ export const ContainerCircle = styled.div<IContainerCircle>`
   }
 `;
 
-export const ContainerLineHorizontal = styled.div`
+export const ContainerLineHorizontal = styled.div<IContainerLineHorizontal>`
   width: 50px;
   height: 4px;
   background: #00ffcc;
+
+  animation: ${props =>
+      props.animationDirection === 'left' ? appearFromLeft : appearFromRight}
+    1.2s;
 
   @media screen and (max-width: 1200px) {
     display: none;

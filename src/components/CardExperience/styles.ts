@@ -1,14 +1,36 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 interface IContainerProps {
   directionProps: string;
 }
 
+const appearFromRight = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to{
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
+
+const appearFromLeft = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to{
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
+
 export const Container = styled.div<IContainerProps>`
   display: flex;
   flex-direction: column;
   width: 450px;
-  height: 135px;
+  height: 120px;
   background: rgba(0, 0, 0, 0.3);
   padding: 10px;
   border-radius: ${props =>
@@ -17,9 +39,12 @@ export const Container = styled.div<IContainerProps>`
     props.directionProps === 'left' ? '4px solid #00ffcc' : ''};
   border-right: ${props =>
     props.directionProps === 'right' ? '4px solid #00ffcc' : ''};
+  animation: ${props =>
+      props.directionProps === 'left' ? appearFromLeft : appearFromRight}
+    1.2s;
 
   h1 {
-    font-size: 22px;
+    font-size: 20px;
     margin-bottom: 5px;
   }
 
@@ -31,7 +56,7 @@ export const Container = styled.div<IContainerProps>`
   }
 
   h3 {
-    font-size: 16px;
+    font-size: 14px;
   }
 
   footer {
@@ -40,17 +65,34 @@ export const Container = styled.div<IContainerProps>`
     margin-top: auto;
 
     h4 {
-      font-size: 14px;
+      font-size: 12px;
     }
 
     svg {
       margin-left: auto;
       color: #aa00ff;
-      transition: 0.2s;
       cursor: pointer;
 
       &:hover {
         color: #00ffcc;
+      }
+    }
+  }
+
+  @media screen and (min-width: 1300px) {
+    height: 135px;
+
+    h1 {
+      font-size: 22px;
+    }
+
+    h3 {
+      font-size: 16px;
+    }
+
+    footer {
+      h4 {
+        font-size: 14px;
       }
     }
   }

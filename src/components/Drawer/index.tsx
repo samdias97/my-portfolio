@@ -36,8 +36,7 @@ const Drawer: React.FC = () => {
 
   mql.addEventListener('change', () => {
     setShow(true);
-    console.log('Entrou');
-    console.log('show: true');
+    if (window.innerWidth > 1200) dispatch(changeStateDrawer(false));
   });
 
   return (
